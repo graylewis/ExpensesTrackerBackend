@@ -1,12 +1,8 @@
 require('dotenv').config()
 
 const express = require('express');
-const { check } = require('express-validator')
-const session = require('express-session');
-const MongoDBSession = require('connect-mongodb-session')(session);
 const mongoose = require('mongoose');
 
-const Auth = require('./controllers/auth');
 const cors = require('cors');
 
 const { MONGO_DB_KEY } = process.env;
@@ -20,18 +16,7 @@ mongoose.connect(MongoURI, {
 })
   .then(res => console.log('Database Connected'));
 
-const store = new MongoDBSession({
-  uri: MongoURI,
-  collection: 'sessions',
-})
-
 const app = express();
-app.use(session({
-  secret: process.env.SECRET,
-  resave: false,
-  saveUninitialized: false,
-}));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -51,22 +36,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// Passport middleware
-app.use(passport.initialize());
-// Passport config
-require("./features/jwt")(passport);
-
-app.get('/', (req, res) => {
-  res.send("Welcome to my backend demonstration!")
-})
-
-app.post('/register', [
-
-  check('email', 'Email is invalid').isEmail().normalizeEmail(),
-  check('password', 'Password must be at least 6 characters and less than 20').isLength({ min: 6, max: 20 }),
-
-], Auth.register)
-
-app.post('/login', Auth.login)
+//Routes
+app.use(require('./routes'));
 
 app.listen(PORT, console.log(`Server running on ${PORT}`))

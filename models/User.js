@@ -3,12 +3,7 @@ const bcrypt = require('bcrypt');
 
 const jwt = require('jsonwebtoken');
 
-
 const userSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: true,
-  },
   email: {
     type: String,
     required: true,
@@ -17,7 +12,15 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-  }
+  },
+  first: {
+    type: String,
+    required: true,
+  }, 
+  last: {
+    type: String,
+    required: true,
+  },
 });
 
 userSchema.pre('save', function encryptPassword(next) {
@@ -48,8 +51,6 @@ userSchema.methods.generateJWT = function() {
   let payload = {
       id: this._id,
       email: this.email,
-      firstName: this.firstName,
-      lastName: this.lastName,
   };
 
   return jwt.sign(payload, process.env.JWT_SECRET, {
