@@ -1,5 +1,5 @@
-# backend-template
-Boilerplate code for JWT authentication with Node.js &amp; MongoDB
+# WorkTimerBackend
+This is the backend for a work timer application written for the MEAN live stack training for Eduonix.
 
 This repository is built upon the backend-template repository from Gray Lewis.
 
