@@ -1,25 +1,20 @@
 const mongoose = require('mongoose');
 
 const entrySchema = new mongoose.Schema({
-  startTime: {
-    type: Date,
-    required: true,
-  },
-  endTime: {
-    type: Date,
-    required: true,
-  },
-  length: {
+  price: {
     type: Number,
     required: true,
   },
-  prettyLength: {
+  date: {
+    type: Date,
+    required: true,
+  },
+  name: {
     type: String,
     required: true,
-  }
 })
 
-const workbookSchema = new mongoose.Schema({
+const expenseBookSchema = new mongoose.Schema({
     entries: [entrySchema],
     userRef: {
       type: mongoose.Schema.Types.ObjectId,
@@ -27,7 +22,7 @@ const workbookSchema = new mongoose.Schema({
     }
 }, {
     timestamps: true,
-    collection: 'workbooks'
+    collection: 'expenseBooks'
 });
 
-module.exports = mongoose.model('Workbook', workbookSchema);
+module.exports = mongoose.model('ExpenseBook', expenseBookSchema);
