@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const { MONGO_DB_KEY } = process.env;
-const MongoURI = `mongodb://127.0.0.1/tutoring?retryWrites=true&w=majority`
+const MongoURI = `mongodb://127.0.0.1/expenses?retryWrites=true&w=majority`
 //                                  ^Insert password here     ^Insert db name here
 
 mongoose.connect(MongoURI, {

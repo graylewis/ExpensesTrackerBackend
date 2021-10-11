@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const { check } = require('express-validator')
 const Auth = require('./controllers/auth');
-const Timer = require('./controllers/timer');
+const Expenses = require('./controllers/expenses');
 
 //Middle ware that is specific to this router
 const passport = require('passport');
@@ -29,7 +29,7 @@ router.post('/login', [
 ], Auth.login)
 
 // Timer Function Routes
-router.get('/workbook', passport.authenticate('jwt', { session: false }), Timer.getWorkbook)
-router.post('/save', passport.authenticate('jwt', { session: false }), Timer.saveEntries)
+router.get('/expenseBook', passport.authenticate('jwt', { session: false }), Expenses.getExpenseBook)
+router.post('/save', passport.authenticate('jwt', { session: false }), Expenses.saveEntries)
 
 module.exports = router;
