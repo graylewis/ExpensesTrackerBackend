@@ -36,3 +36,19 @@ exports.saveEntries = async (req, res) => {
     res.status(200).json( toSave.entries.length )  
   }
 }
+
+exports.deleteEntry = async (req, res) => {
+  const { _id } = req.body
+
+  const expenseBook = await ExpenseBook.findOne({ userRef: req.user._id });
+
+  if (expenseBook) {
+    expenseBook.entries = expenseBook.entries.filter((item) => item.id !== _id)
+
+    const expenseBook_ = await expenseBook.save()
+    res.status(200).json( expenseBook.entries.length )
+  } else {
+    res.status(400).json("No expense book was found.")  
+  }
+}
+

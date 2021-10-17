@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt-nodejs');
 
 const jwt = require('jsonwebtoken');
 
@@ -29,7 +29,7 @@ userSchema.pre('save', function encryptPassword(next) {
   bcrypt.genSalt(10, (err, salt) => {
     if (err) return next(err);
     // hash the password using our new salt
-    bcrypt.hash(user.password, salt, (hashErr, hash) => {
+    bcrypt.hash(user.password, salt, null, (hashErr, hash) => {
       if (hashErr) return next(hashErr);
 
       // override the cleartext password with the hashed one

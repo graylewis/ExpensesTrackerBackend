@@ -3,6 +3,8 @@ const User = require('../models/user');
 exports.login = async (req, res) => {
   try {
       const { email, password } = req.body;
+      console.log(req.body);
+
       const user = await User.findOne({ email });
       if (!user) return res.status(401).json({message: 'The email address ' + email + ' is not associated with any account. Double-check your email address and try again.'});
 

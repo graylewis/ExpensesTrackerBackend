@@ -12,6 +12,7 @@ const entrySchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+  }
 })
 
 const expenseBookSchema = new mongoose.Schema({

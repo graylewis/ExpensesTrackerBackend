@@ -30,6 +30,7 @@ router.post('/login', [
 
 // Timer Function Routes
 router.get('/expenseBook', passport.authenticate('jwt', { session: false }), Expenses.getExpenseBook)
-router.post('/save', passport.authenticate('jwt', { session: false }), Expenses.saveEntries)
+router.post('/save', passport.authenticate('jwt', { session: false }), Expenses.saveEntries)  
+router.post('/delete', passport.authenticate('jwt', { session: false }), Expenses.deleteEntry)
 
 module.exports = router;
